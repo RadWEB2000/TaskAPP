@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import styles from './Create.module.scss';
 
 const Menu = ({create,createTask,createNote}) => {
@@ -16,7 +16,11 @@ const Menu = ({create,createTask,createNote}) => {
 
 
 
-const TypeInput = ({input, name,title, type, refValue}) => {
+const TypeInput = ({input, name,title, type, inputValue, updateValue}) => {
+
+   
+
+
     return (
         <>
             {
@@ -25,7 +29,7 @@ const TypeInput = ({input, name,title, type, refValue}) => {
                     <div className={styles.form__item}>
                         <label htmlFor={name} className={styles.form__item__label}>{title}</label>
                         <div className={styles.form__item__input}>
-                            <input type={type} name={name} id={name} ref={refValue}/>
+                            <input type={type} name={name} id={name} onChange={updateValue} ref={inputValue}/>
                             <span/>
                         </div>    
                     </div>
@@ -33,7 +37,7 @@ const TypeInput = ({input, name,title, type, refValue}) => {
                     <div className={styles.form__itemTA}>
                         <label htmlFor={name} className={styles.form__itemTA__label}>{title}</label>
                         <div className={styles.form__itemTA__textarea}>
-                            <textarea name={name} id={name} rows="5" ref={refValue}/>
+                            <textarea name={name} id={name} rows="5"  onChange={updateValue} ref={inputValue}/>
                         </div>    
                     </div>
                     
@@ -49,8 +53,6 @@ const Button = ({ behave }) => {
         </button>
     )
 }
-
-
 
 const Task = () => {
     return (
@@ -73,7 +75,7 @@ const Task = () => {
     )
 }
 
-const Note = ({title,lead,img,text}) => {
+const Note = ({titleValue, imgValue, leadValue, textNoteValue, inputValue,updateValue}) => {
     return (
         <form action="" className={styles.form}>
             <div className={styles.form__wrapper}>
@@ -82,27 +84,31 @@ const Note = ({title,lead,img,text}) => {
                     title='Title'
                     name='title'
                     type='text'
-                    refValue={title}
+                    updateValue={updateValue}
+                    inputValue={titleValue}
                 />  
                 <TypeInput
                     input={true}
                     title='Lead'
                     name='lead'
                     type='text'
-                    refValue={lead}
+                    updateValue={updateValue}
+                    inputValue={leadValue}
                 />
                 <TypeInput
                     input={true}
                     title='Image URL'
                     name='image'
                     type='url'
-                    refValue={img}
+                    updateValue={updateValue}
+                    inputValue={imgValue}
                 />
                 <TypeInput
                     input={false}
                     title='Value of note'
                     name='valueNote'
-                    refValue={text}
+                    updateValue={updateValue}
+                    inputValue={textNoteValue}
                 />
             </div>
             <Button/>
@@ -118,19 +124,24 @@ export const Create = () => {
     const createTask = () => toggleCreate(true);
     const createNote = () => toggleCreate(false);
 
-    const noteValues = {
-        title: 'Avengers',
-        lead: 'dsasdkjma kjmsdjjafaiojsfjajf',
-        img: '',
-        text:'asdasduaf ajsjdujauhsfh huahsdfuajisrfd aid fiiasfijkaispf apisodi opakpok pokaposkdpo poaskpokdpoaskokaok oapdfko'
+        
+    const inputValue = useRef(null);
+
+    const titleValue = useRef(null);
+    const leadValue = useRef(null);
+    const imgValue = useRef(null);
+    const textNoteValue = useRef(null);
+
+    const updateValue = () => {
+        const title = titleValue.current.value;
+        const lead = leadValue.current.value;
+        const img = imgValue.current.value;
+        const textNote = textNoteValue.current.value;
+
     }
 
-    // const taskValues = {
-    //     title: 'Avengers',
-    //     lead: 'Zgraja plastikolubów',
-    //     img: '',
-    //     text:'Bedą się napierdalać'
-    // }
+
+  
 
 
     return (
@@ -147,24 +158,21 @@ export const Create = () => {
                     ?  <Task
                                 
                         />
-                    :   <Note
-                            title={noteValues.title}
-                            lead={noteValues.lead}
-                            img={noteValues.img}
-                            text={noteValues.text}
-                        />
+                    : <Note
+                        inputValue={inputValue}
+                        titleValue={titleValue}
+                        leadValue={leadValue}
+                        imgValue={imgValue}
+                        textNoteValue={textNoteValue}
+                        updateValue={updateValue}
+                      />
                 }
             </div>
         </div>
             <strong style={{ 'position': 'fixed', 'top': '0'}}>
-            {noteValues.title}
-                <br></br>
-            {noteValues.lead}
-                <br></br>
-            {noteValues.img}
-                <br></br>
-            {noteValues.text}
+            
         </strong>    
+      
         </>    
 
     )
