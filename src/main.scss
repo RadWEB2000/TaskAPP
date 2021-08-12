@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+// COLORS
+
+    $apricot:hsl(19,97,86);
+    $bittersweet:hsl(0,100,71);
+    $black-raisin:hsl(295,14,16);
+    $blue-bdazzled:hsl(214,35,37);
+    $blue-tiffany:hsl(174,62,47);
+    $cadet-space:hsl(221,26,21);
+    $cyan-light:hsl(176,62,87);
+    $cyan-pale:hsl(202,46,72);
+    $green-midnight:hsl(188,56,23);
+    $grey-cultured:hsl(210,16,93);
+    $grey-gainsboro:hsl(210,14,89);
+    $gunmetal:hsl(218, 23%, 21%);
+    $indigo-persian:hsl(271,85,23);
+    $isabel:hsl(20,25,95);
+    $isabel-dark:hsl(12,38,92);
+    $linen:hsl(30,42,91);
+    $liver-dark:hsl(285,3,27);
+    $mauve:hsl(278,100,83);
+    $mellow-apricot:hsl(34,100,71);
+    $mint:hsl(120,100,98);
+    $orange-peel:hsl(35,100,55);
+    $orange-sienna:hsl(12,83,62);
+    $orange-sienna-dark:hsl(344,59,17);
+    $pink-champagne:hsl(16,38,85);
+    $red-english:hsl(353,51,46);
+    $sand-desert:hsl(26,34,72);
+    $turquise:hsl(176,56,55);
+    $violet-french:hsl(272,63,46);
+    $violet-russian:hsl(262,100,8);
+    $white:hsl(0,0,100);
+    $white-cultured:hsl(210,17,98);
+    $yellow-napies:hsl(50,100,71);
+
+// MIXINS
+
+@mixin Center{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+@mixin CenterX{
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@mixin CenterY{
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@mixin Flex{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+@mixin FlexAround{
+    @include  Flex();
+    justify-content: space-around;
+}
+
+@mixin FlexColumn{
+    flex-direction: column;
+}
+
+@mixin FlexBetween{
+    @include  Flex();
+    justify-content: space-between;
+}
+
+@mixin FlexEvenly{
+    @include Flex();
+    justify-content: space-evenly;
+}
+
+@mixin FlexRow{
+    flex-direction: row;
+}
+
+@mixin FontMontserrat{
+    font-family: 'Montserrat', sans-serif;
+}
+
+@mixin Reset{
+    border:none;
+    background: none;
+    outline:none;
+}
+
+.silver{
+    background:silver
+}
+
+.gold{
+    background: gold;
+}
+
+.height{
+    height: 70vh;
+    background: lime;
+}
+// 
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+*::before,
+*::after{
+    content: '';
+    position: absolute;
+}
+
+*::selection{
+        background:$white-cultured;
+        color:$gunmetal;
+}
+
+::-webkit-scrollbar{
+    width:0;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    @include FontMontserrat();
+    background:$white-cultured;
+    background-attachment: fixed;
+    color: $gunmetal;
+    overflow-x: hidden;
+    width: 100vw;
+
+}
+
+a{
+    text-decoration: none;
+}
+
+li,ol,ul{
+    list-style: none;
+}

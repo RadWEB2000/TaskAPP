@@ -1,0 +1,364 @@
+@import '../../main.scss';
+
+.noteSnap {
+    color: $cadet-space;
+    cursor: default;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: 25rem;
+    margin: 1rem auto;
+    opacity: 0.2;
+    position: relative;
+    transition: .15s linear opacity;
+    width: 75vw;
+
+    &__del,
+    &__expand {
+        @include Flex;
+        @include Reset;
+        color: $cadet-space;
+        cursor: pointer;
+        display: none;
+        font-size: 3rem;
+        height: 4rem;
+        position: absolute;
+        transition: .2s linear display, .2s linear transform;
+        width: 4rem;
+    }
+
+    &__del {
+        left: .55rem;
+        top: .55rem;
+    }
+
+    &__expand {
+        bottom: .55rem;
+        right: .55rem;
+    }
+
+    &__img {
+        @include Center;
+        border-radius: 50%;
+        height: 20rem;
+        overflow: hidden;
+        position: relative;
+        width: 20rem;
+
+        &Children {
+            filter: brightness(80%);
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    &__wrapper {
+        @include Flex;
+        @include FlexColumn;
+        padding: 0.45rem;
+
+        &__title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin: 0.45rem 0;
+        }
+
+        &__lead {
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+    }
+}
+
+.noteSnap:hover {
+    opacity: 1;
+}
+
+.noteSnap:hover .noteSnap__del,
+.noteSnap:hover .noteSnap__expand {
+    display: flex;
+}
+
+.noteSnap:hover .noteSnap__del:hover,
+.noteSnap:hover .noteSnap__expand:hover {
+    display: flex;
+    transform: scale(1.1);
+}
+
+.noteSnap:hover .noteSnap__imgChildren {
+    filter: brightness(105%);
+}
+
+.noteSnap:last-of-type{
+    margin-bottom: 20rem;
+}
+
+.noteFull {
+    background: $white-cultured;
+    height: 100vh;
+    left: 0;
+    overflow-y: scroll;
+    padding-bottom: 10rem;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 10;
+
+    &__close {
+        @include Flex;
+        @include Reset;
+        color: $white-cultured;
+        cursor: pointer;
+        font-size: 4rem;
+        height: 4rem;
+        left: .5rem;
+        position: absolute;
+        top: .5rem;
+        transition: .2s linear transform;
+        width: 4rem;
+        z-index: 5;
+
+        &:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+    }
+
+    &__img {
+        @include Flex;
+        height: 60vh;
+
+        &Children {
+            animation: backgroundImage 20s linear infinite alternate-reverse;
+            background-attachment: fixed;
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    &__wrapper {
+        cursor: default;
+        margin: 1rem auto;
+        width: 85vw;
+
+        &__title {
+            color: $white-cultured;
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin: 1rem 0;
+            text-align: center;
+            text-shadow: 0 0 .5rem $green-midnight, 0 0 .5rem $gunmetal;
+            word-wrap: break-word;
+        }
+
+        &__lead {
+            color: $green-midnight;
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin: 0.45rem 0;
+            opacity: 0.95;
+            text-indent: 10rem;
+        }
+
+        &__text {
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: .25rem;
+            text-indent: 5rem;
+        }
+    }
+}
+
+
+
+@keyframes backgroundImage {
+    0% {
+        filter: brightness(70%) hue-rotate(100deg);
+    }
+
+    100% {
+        filter: brightness(70%) hue-rotate(1000deg);
+    }
+}
+
+@media only screen {
+    @media (max-width:850px) {
+        @media (orientation:portrait) {
+            @import '../../main.scss';
+
+            .noteSnap {
+                grid-template-columns: 1fr;
+                min-height: 20rem;
+                height: auto;
+                margin: 1.5rem auto;
+                opacity: 0.2;
+                width: 95vw;
+
+                &__del,
+                &__expand {
+                    display: flex;
+                    font-size: 2.2rem;
+                    height: 2.5rem;
+                    width: 2.5rem;
+                }
+
+                &__del {
+                    left: .25rem;
+                    top: .25rem;
+                }
+
+                &__expand {
+                    bottom: .25rem;
+                    right: .25rem;
+                }
+
+                &__img {
+                    height: 10rem;
+                    margin: 1rem 0;
+                    width: 10rem;
+                }
+
+                &__wrapper {
+                    padding: 1rem;
+                    margin: 1rem 0;
+
+                    &__title {
+                        font-size: 2.4rem;
+                        font-weight: 800;
+                        margin: 0.45rem 0;
+                    }
+
+                    &__lead {
+                        font-size: 1.6rem;
+                        font-weight: 300;
+                    }
+                }
+            }
+
+
+
+            .noteFull {
+
+
+                &__close {
+                    font-size: 3.4rem;
+                    height: 3.5rem;
+                    width: 3.5rem;
+                }
+
+                &__img {
+                    height: 55vh;
+                }
+
+                &__wrapper {
+                    margin: 2rem auto;
+                    width: 98vw;
+                    padding: 0.45rem;
+
+                    &__title {
+                        font-size: 2.5rem;
+                        margin: 1rem 0;
+                    }
+
+                    &__lead {
+                        font-size: 2.2rem;
+                        opacity: 0.95;
+                        text-indent: 6rem;
+                    }
+
+                    &__text {
+                        font-size: 1.7rem;
+                        letter-spacing: .15rem;
+                        text-indent: 3rem;
+                    }
+                }
+            }
+
+        }
+
+        @media (orientation:landscape) {
+            .noteSnap {
+                grid-template-columns: 2fr 3fr;
+                height: 20rem;
+                max-height: auto;
+                margin: 1.3rem auto;
+                width: 95vw;
+
+                &__del,
+                &__expand {
+                    display: block;
+                    font-size: 2.5rem;
+                    height: 2.6rem;
+                    width: 2.6rem;
+                }
+
+                &__del {
+                    left: .75rem;
+                    top: .75rem;
+                }
+
+                &__expand {
+                    bottom: .75rem;
+                    right: .75rem;
+                }
+
+                &__img {
+                    height: 15rem;
+                    width: 15rem;
+                }
+
+                &__wrapper {
+
+                    &__title {
+                        font-size: 2.5rem;
+                    }
+
+                    &__lead {
+                        font-size: 1.5rem;
+                        font-weight: 400;
+                    }
+                }
+            }
+
+
+
+            .noteFull {
+                background: $white-cultured;
+                height: 100vh;
+                left: 0;
+                overflow-y: scroll;
+                padding-bottom: 10rem;
+                position: fixed;
+                top: 0;
+                width: 100vw;
+                z-index: 10;
+
+
+
+                &__img {
+                    height: 55vh;
+                }
+
+                &__wrapper {
+                    width: 95vw;
+
+                    &__title {
+                        font-size: 3rem;
+
+                    }
+
+                    &__lead {
+                        font-size: 2.2rem;
+                        text-indent: 6rem;
+                    }
+
+                    &__text {
+                        font-size: 1.8rem;
+                        font-weight: 400;
+                        letter-spacing: .15rem;
+                        text-indent: 3rem;
+                    }
+                }
+            }
+        }
+    }
+
+}

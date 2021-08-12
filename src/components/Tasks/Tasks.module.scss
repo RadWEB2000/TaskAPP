@@ -1,0 +1,180 @@
+@import '../../main.scss';
+
+.task__done {
+    @extend .task;
+    box-shadow: 0 0 1rem $turquise, 0 0 1rem .1rem $green-midnight;
+    transition: .2s linear box-shadow;
+
+    .task__check {
+        @include Flex;
+        color: $green-midnight;
+        cursor: pointer;
+        transition: .2s linear color;
+    }
+
+    .task__wrapper__date {
+        font-weight: 300;
+    }
+
+    .task__wrapper__text {
+        color: $green-midnight;
+        font-weight: 700;
+    }
+
+    .task__wrapper__text::selection {
+        background: $green-midnight;
+        color: $white-cultured;
+    }
+}
+
+.task {
+    @include CenterX;
+    height: auto;
+    margin: 1rem 0;
+    min-height: 15rem;
+    position: relative;
+    transition: .2s linear box-shadow;
+    width: 70vw;
+
+    &__check {
+        @include Flex;
+        cursor: pointer;
+        height: 3rem;
+        position: absolute;
+        transition: .2s linear color;
+        width: 3rem;
+        z-index: 4;
+
+        &__input {
+            display: none;
+        }
+
+        &__label {
+            @include Flex;
+            cursor: pointer;
+            font-size: 4rem;
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    &__button {
+        @include Flex;
+        @include Reset;
+        bottom: 0;
+        color: $gunmetal;
+        font-size: 2.5rem;
+        height: 3rem;
+        position: absolute;
+        right: 0;
+        transition: .2s linear color;
+        width: 3rem;
+        z-index: 4;
+    }
+
+    &__button:hover {
+        color: $bittersweet;
+        cursor: pointer;
+    }
+
+    &__wrapper {
+        @include Flex;
+        @include FlexColumn;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        width: 100%;
+
+        &__date {
+            font-size: 1.9rem;
+            font-weight: 700;
+            padding: 0.35rem;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .2s linear font-weight;
+        }
+
+        &__text {
+            @include Flex;
+            font-size: 1.7rem;
+            margin: 3.5rem 0;
+            transition: .2s linear color, .2s linear font-weight;
+        }
+    }
+}
+
+.task:first-of-type {
+    margin-top: 2rem;
+}
+
+.task:last-of-type {
+    margin-bottom: 30rem;
+}
+
+@media only screen and (max-width:800px) {
+    @media (orientation:portrait) {
+
+
+        .task {
+            margin: 1.5rem 0;
+            width: 95vw;
+
+            &__check {
+                &__label {
+                    font-size: 2rem;
+                }
+            }
+
+            &__button {
+                font-size: 2rem;
+            }
+
+            &__wrapper {
+
+                &__date {
+                    font-size: 1.4rem;
+                }
+
+                &__text {
+                    font-size: 1.8rem;
+                }
+            }
+        }
+
+    }
+
+    @media (orientation:landscape) {
+
+
+
+        .task {
+            margin: 1.2rem 0;
+            min-height: 10rem;
+            width: 95vw;
+
+            &__check {
+                &__label {
+                    font-size: 2rem;
+                }
+            }
+
+            &__button {
+                font-size: 2rem;
+            }
+
+            &__wrapper {
+
+                &__date {
+                    font-size: 1.5rem;
+                }
+
+                &__text {
+                    @include Flex;
+                    font-size: 1.9rem;
+                }
+            }
+        }
+
+    }
+}

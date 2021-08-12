@@ -1,0 +1,362 @@
+@import '../../main.scss';
+
+.create {
+    @include CenterX;
+    min-height: 60rem;
+    height: auto;
+    margin: 5rem 0;
+    position: relative;
+    width: 55vw;
+
+    .menu {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 5rem;
+        position: relative;
+
+        &__item {
+            @include Reset;
+            border: 0 solid $green-midnight;
+            border-bottom: 2px solid $green-midnight;
+            color: $gunmetal;
+            cursor: pointer;
+            font-size: 2.7rem;
+            font-weight: 900;
+            transition: .15s linear border-bottom, .15s linear border, .15s linear color;
+        }
+
+        &__item__choose {
+            @extend .menu__item;
+            border: 2px solid $green-midnight;
+            border-bottom: 0 solid $green-midnight;
+            color: $green-midnight;
+            transition: .15s linear border-bottom, .15s linear border, .15s linear color;
+        }
+    }
+
+}
+
+.wrapper {
+    @include Flex;
+    @include FlexColumn;
+    border: 2px solid $green-midnight;
+    border-top: 0 solid $green-midnight;
+    height: calc(100% - 5rem);
+    position: absolute;
+    width: 100%;
+
+    .form {
+        height: auto;
+        padding: 0.5rem;
+        position: relative;
+
+        &__wrapper {
+            height: auto;
+            margin: 1rem 0;
+        }
+
+        &__item {
+            color: #fff;
+            margin: 0.45rem 0;
+            width: 45rem;
+            min-height: 5rem;
+
+            &__label {
+                @include Flex;
+                color: $green-midnight;
+                font-size: 2.5rem;
+                font-weight: 600;
+                height: 3rem;
+            }
+
+            &__input {
+                @include Flex;
+                height: 4.5rem;
+                position: relative;
+
+                input {
+                    @include Reset;
+                    cursor: pointer;
+                    height: 100%;
+                    font-size: 2.1rem;
+                    font-weight: 30;
+                    opacity: 0.5;
+                    text-align: center;
+                    transition: .2s linear opacity;
+                    width: 100%;
+                }
+
+                input:focus {
+                    opacity: 1;
+                }
+
+                span {
+                    @include CenterX;
+                    background: $green-midnight;
+                    bottom: 0;
+                    height: 0.25rem;
+                    position: absolute;
+                    transition: .2s linear background;
+                    width: 100%;
+                }
+
+                input:focus~span {
+                    background: $orange-sienna;
+                }
+
+            }
+        }
+
+        &__itemTA {
+            @extend .form__item;
+            margin: .7rem 0;
+            min-height: 10rem;
+
+            &__label {
+                @include Flex;
+                @extend .form__item__label;
+            }
+
+            &__textarea {
+                @include Flex;
+                height: 13rem;
+                padding: 0.3rem;
+
+                textarea {
+                    @include FontMontserrat;
+                    @include Reset;
+                    border: .25rem solid $green-midnight;
+                    height: 100%;
+                    opacity: 0.5;
+                    padding: 0.25rem;
+                    text-indent: 5rem;
+                    transition: .2s linear border, .2s linear opacity;
+                    width: 100%;
+                }
+
+                textarea:focus {
+                    border: .25rem solid $orange-sienna;
+                    opacity: 1;
+                }
+            }
+
+        }
+
+        &__submit {
+            @include Reset;
+            color: $green-midnight;
+            cursor: pointer;
+            font-size: 3rem;
+            font-weight: 900;
+            height: 5rem;
+            margin: 2rem 0;
+            position: relative;
+            text-transform: uppercase;
+            transition: .2s linear transform;
+            width: 15rem;
+        }
+
+        &__submit:hover,
+        &__submit:focus {
+            transform: translateY(-1rem);
+        }
+
+        &__submit::before {
+            @include CenterX;
+            background: $green-midnight;
+            bottom: -1rem;
+            height: .3rem;
+            position: absolute;
+            transition: .2s linear width;
+            width: 0%;
+        }
+
+        &__submit:focus::before,
+        &__submit:hover::before {
+            width: 100%;
+        }
+
+    }
+
+
+}
+
+
+
+@media only screen and (max-width:800px) {
+    @media (orientation:portrait) {
+
+        .create {
+            margin: 4.5rem 0;
+            min-height: 50rem;
+            overflow-x: hidden;
+            width: 98vw;
+
+            .menu {
+                height: 3rem;
+
+                &__item {
+                    font-size: 2.3rem;
+                }
+            }
+
+        }
+
+        .wrapper {
+            height: calc(100% - 3rem);
+
+            .form {
+                height: auto;
+                padding: 0.5rem;
+                position: relative;
+
+                &__wrapper {
+                    margin: 0;
+                }
+
+                &__item {
+                    margin: 0.45rem auto;
+                    width: 95vw;
+                    min-height: 5rem;
+
+                    &__label {
+                        font-size: 2.1rem;
+                        height: 2.5rem;
+                    }
+
+                    &__input {
+                        @include Flex;
+                        height: 2.4rem;
+
+                        input {
+                            font-size: 1.7rem;
+                        }
+
+                        span {
+                            height: 0.15rem;
+                        }
+                    }
+                }
+
+                &__itemTA {
+                    min-height: 6rem;
+
+
+                    &__textarea {
+                        height: 10rem;
+                        padding: 0.5rem;
+
+                        textarea {
+                            text-indent: 1rem;
+                        }
+                    }
+                }
+
+                &__submit {
+                    font-size: 2.6rem;
+                }
+
+                &__submit:hover,
+                &__submit:focus {
+                    transform: translateY(-.6rem);
+                }
+
+                &__submit::before {
+                    bottom: -.6rem;
+                    height: .25rem;
+                }
+            }
+
+
+        }
+    }
+
+    @media (orientation:landscape) {
+        .create {
+            @include CenterX;
+            min-height: 55rem;
+            margin: 5rem 0;
+            position: relative;
+            width: 75vw;
+
+            .menu {
+                height: 3rem;
+                &__item {
+                    font-size: 2.4rem;
+                }
+            }
+
+        }
+
+        .wrapper {
+            height: calc(100% - 3rem);
+
+            .form {
+                height: auto;
+                padding: 0.5rem;
+                position: relative;
+
+                &__wrapper {
+                    height: auto;
+                    margin:  0;
+                }
+
+                &__item {
+                    margin: 0.7rem 0;
+                    width: 65vw;
+
+                    &__label {
+                        font-size: 2.1rem;
+                        height: 2.5rem;
+                    }
+
+                    &__input {
+                        height: 3rem;
+
+                        input {
+                            font-size: 2.1rem;
+                        }
+                        span {
+                            height: 0.15rem;
+                        }
+
+                      
+
+                    }
+                }
+
+                &__itemTA {
+                    min-height: 5rem;
+
+                   
+
+                    &__textarea {
+                        height:10rem;
+                        textarea {
+                            border: .15rem solid $green-midnight;
+                         
+                        }
+                        textarea:focus {
+                            border: .15rem solid $orange-sienna;
+                        }
+                    }
+
+                }
+
+                &__submit {
+                
+                    font-size: 2.4rem;
+                    height: 3rem;
+                    margin: 3rem 0;
+                 
+                }
+
+               
+
+            
+            }
+
+
+        }
+    }
+}
