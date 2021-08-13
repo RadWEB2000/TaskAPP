@@ -16,7 +16,7 @@ const Menu = ({create,createTask,createNote}) => {
 
 
 
-const TypeInput = ({input, name,title, type, inputValue, updateValue}) => {
+const TypeInput = ({input, inputFunction, name,title, type, value}) => {
 
    
 
@@ -29,7 +29,7 @@ const TypeInput = ({input, name,title, type, inputValue, updateValue}) => {
                     <div className={styles.form__item}>
                         <label htmlFor={name} className={styles.form__item__label}>{title}</label>
                         <div className={styles.form__item__input}>
-                            <input type={type} name={name} id={name} onChange={updateValue} ref={inputValue}/>
+                            <input type={type} name={name} id={name} value={value} onChange={inputFunction} />
                             <span/>
                         </div>    
                     </div>
@@ -37,7 +37,7 @@ const TypeInput = ({input, name,title, type, inputValue, updateValue}) => {
                     <div className={styles.form__itemTA}>
                         <label htmlFor={name} className={styles.form__itemTA__label}>{title}</label>
                         <div className={styles.form__itemTA__textarea}>
-                            <textarea name={name} id={name} rows="5"  onChange={updateValue} ref={inputValue}/>
+                            <textarea name={name} id={name} rows="5" value={value} onChange={inputFunction} />
                         </div>    
                     </div>
                     
@@ -54,20 +54,24 @@ const Button = ({ behave }) => {
     )
 }
 
-const Task = () => {
+const Task = ({inputValue, inputFunction}) => {
     return (
        <form action="" className={styles.form}>
             <div className={styles.form__wrapper}>
                 <TypeInput
                     input={true}
+                    inputFunction={inputFunction}
                     title='Date task'
                     name='date'
                     type='date'
+                    value={inputValue}
                 />  
                 <TypeInput
                     input={false}
+                    inputFunction={inputFunction}
                     title='Value of task'
                     name='valueTask'
+                    value={inputValue}
                 />
             </div>
             <Button />
@@ -75,40 +79,41 @@ const Task = () => {
     )
 }
 
-const Note = ({titleValue, imgValue, leadValue, textNoteValue, inputValue,updateValue}) => {
+const Note = ({inputValue, inputFunction}) => {
     return (
         <form action="" className={styles.form}>
             <div className={styles.form__wrapper}>
                 <TypeInput
                     input={true}
+                    inputFunction={inputFunction}
                     title='Title'
                     name='title'
                     type='text'
-                    updateValue={updateValue}
-                    inputValue={titleValue}
+                    value={inputValue}
+
                 />  
                 <TypeInput
                     input={true}
+                    inputFunction={inputFunction}
                     title='Lead'
                     name='lead'
                     type='text'
-                    updateValue={updateValue}
-                    inputValue={leadValue}
+                    value={inputValue}
                 />
                 <TypeInput
                     input={true}
+                    inputFunction={inputFunction}
                     title='Image URL'
                     name='image'
                     type='url'
-                    updateValue={updateValue}
-                    inputValue={imgValue}
+                    value={inputValue}
                 />
                 <TypeInput
                     input={false}
+                    inputFunction={inputFunction}
                     title='Value of note'
                     name='valueNote'
-                    updateValue={updateValue}
-                    inputValue={textNoteValue}
+                    value={inputValue}
                 />
             </div>
             <Button/>
@@ -125,23 +130,25 @@ export const Create = () => {
     const createNote = () => toggleCreate(false);
 
         
-    const inputValue = useRef(null);
+    const [inputValue, inputToggle] = useState("");
 
-    const titleValue = useRef(null);
-    const leadValue = useRef(null);
-    const imgValue = useRef(null);
-    const textNoteValue = useRef(null);
+    const inputFunction = e => {
+        inputToggle(e.target.value);
+        const inputName = e.target.name;
+        // console.log('Wartosc przed warunkami: ' + inputName + ' = ' + inputValue);
 
-    const updateValue = () => {
-        const title = titleValue.current.value;
-        const lead = leadValue.current.value;
-        const img = imgValue.current.value;
-        const textNote = textNoteValue.current.value;
-
+        if (inputName === 'title') {
+            console.log(inputValue)
+        } else if (inputName === 'lead') {
+            console.log(`nazwa inputa to value note ${inputName}`)
+        } else if (inputName === 'image') {
+            console.log(`nazwa inputa to value note ${inputName}`)
+        } else if (inputName === 'valueNote') {
+            console.log(`nazwa inputa to value note ${inputName}`)
+        }
     }
-
-
-  
+   
+   
 
 
     return (
@@ -156,15 +163,12 @@ export const Create = () => {
                 {
                     create 
                     ?  <Task
-                                
+                            inputValue={inputValue}
+                            inputFunction={inputFunction}
                         />
                     : <Note
-                        inputValue={inputValue}
-                        titleValue={titleValue}
-                        leadValue={leadValue}
-                        imgValue={imgValue}
-                        textNoteValue={textNoteValue}
-                        updateValue={updateValue}
+                            inputValue={inputValue}
+                            inputFunction={inputFunction}
                       />
                 }
             </div>
