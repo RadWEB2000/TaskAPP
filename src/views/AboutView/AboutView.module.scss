@@ -1,0 +1,318 @@
+@import '../../main.scss';
+
+.header {
+    height: 70vh;
+
+    h2 {
+        @include Flex;
+        backdrop-filter: brightness(65%) hue-rotate(200deg);
+        color: $white-cultured;
+        height: 100%;
+        text-shadow: 0 0 1rem $gunmetal;
+        font-size: 5rem;
+        width: 100%;
+    }
+}
+
+.description {
+    @include Flex;
+    color: $green-midnight;
+    cursor: default;
+    height: 40rem;
+
+    &__list {
+        @include FlexColumn;
+        @include FlexEvenly;
+        width: 80%;
+        height: 80%;
+
+        &__item {
+            list-style-type: decimal;
+            font-size: 2.4rem;
+            font-weight: 900;
+        }
+
+
+
+    }
+}
+
+.hero {
+    background-color: $cadet-space;
+    background-image: url('https://scontent-frt3-1.xx.fbcdn.net/v/t1.6435-9/207862398_136967921867588_7507097768406675487_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=ph2O5qX1Ay0AX_wFFoJ&_nc_oc=AQlsDJDZVq1fbV7mfFlKqJEwuJvBdymRBpJuO7iwTeRIZR9tLnSeE_nYORvWusILROs&tn=D1bEJNDIhyXuWxV5&_nc_ht=scontent-frt3-1.xx&oh=44b2e223c16bb06ca1e50bd2b5dd8a35&oe=613BAF4D');
+    background-attachment: fixed;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+    height: 45rem;
+    filter: brightness(95%) grayscale(100%) hue-rotate(400deg);
+    margin: 5rem auto;
+    stroke: 1rem solid $gunmetal;
+    position: relative;
+    width: 45rem;
+}
+
+.about {
+    color: $green-midnight;
+    cursor: default;
+    min-height: 40rem;
+    margin: 5rem 0;
+
+    h2 {
+        font-size: 5rem;
+        font-weight: 900;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    p {
+        font-size: 2.5rem;
+        padding: 5rem;
+        text-indent: 5rem;
+        opacity: 0.75;
+        height: 100%;
+    }
+}
+
+.socials {
+    @include FlexAround;
+    height: 10rem;
+    margin: 5rem 0;
+    width: 100vw;
+
+    &__item {
+        @include Flex;
+        border-radius: 50%;
+        height: 6rem;
+        overflow: hidden;
+        width: 6rem;
+        transition: .2s linear background, ;
+
+
+
+        &__icon {
+            font-size: 4.5rem;
+            color: $gunmetal;
+            transition: .2s linear transform, .2s linear color;
+
+        }
+    }
+
+    &__item:hover:nth-child(1) {
+        background: #1877F2;
+    }
+
+    &__item:hover:nth-child(2) {
+        background: #E4405F;
+    }
+
+    &__item:hover:nth-child(3) {
+        background: #21759B;
+    }
+
+    &__item:hover:nth-child(4) {
+        background: #E4405F;
+    }
+
+    &__item:hover:nth-child(5) {
+        background: #34465D;
+    }
+
+    &__item:hover &__item__icon {
+        color: $white-cultured;
+        transform: skewY(180deg);
+    }
+}
+
+.button {
+    @include Flex;
+    // background: #b3ceff8a;
+    height: 8rem;
+    margin: 5rem auto 15rem auto;
+    position: relative;
+    width: 16rem;
+    z-index: 1;
+
+    &__text {
+        color: $green-midnight;
+        font-size: 4.5rem;
+        font-weight: 600;
+    }
+
+}
+
+
+
+.button_span_1,
+.button_span_3 {
+    position: absolute;
+    width: 0%;
+    height: .5rem;
+    background: $green-midnight;
+}
+
+.button_span_2,
+.button_span_4 {
+    position: absolute;
+    width: .5rem;
+    height: 0%;
+    background: $green-midnight;
+}
+
+.button_span_1 {
+    top: 0;
+    left: 0;
+    transition: .2s linear width;
+}
+
+.button_span_2 {
+    top: 0;
+    right: 0;
+    transition: .2s .2s linear height;
+}
+
+.button_span_3 {
+    bottom: 0;
+    right: 0;
+    transition: .2s .4s linear width;
+}
+
+.button_span_4 {
+    bottom: 0;
+    left: 0;
+    transition: .2s .6s linear height;
+}
+
+.button:hover .button_span_1,
+.button:hover .button_span_3 {
+    width: 100%;
+}
+
+.button:hover .button_span_2,
+.button:hover .button_span_4 {
+    height: 100%;
+}
+
+@media only screen and (max-width:800px) {
+    @media (orientation:portrait) {
+        .header {
+            height: 40vh;
+            h2 {
+                backdrop-filter: brightness(45%) hue-rotate(200deg);
+                font-size: 3rem;
+            }
+        }
+        .description {
+            height: auto;
+            min-height: 30rem;
+            &__list {
+                height: auto;
+                width: 65vw;
+                &__item {
+                    font-size: 2.1rem;
+                    font-weight: 600;
+                    margin: 0.45rem 0;
+                    opacity: 0.85;
+                }
+            }
+        }
+        .hero {
+            height: 30rem;
+            margin: 7rem auto;
+            width: 100vw;
+        }
+        .about {
+            h2 {
+                font-size: 3rem;
+            }
+            p {
+                font-size: 2rem;
+                opacity: 0.75;
+                padding: 1rem;
+            }
+        }
+        .socials {
+            @include FlexAround;
+            height: 7rem;
+            margin: 3rem 0;
+            width: 100vw;
+
+            &__item {
+                height: 5rem;
+                width: 5rem;
+
+                &__icon {
+                    font-size: 3.5rem;
+                }
+            }
+        }
+        .button {
+            height: 5.5rem;
+            width: 15.5rem;
+
+            &__text {
+                font-size: 4rem;
+            }
+        }
+    }
+    @media (orientation:landscape) {
+        .header {
+            height: 15rem;
+            h2 {
+                font-size: 3rem;
+            }
+        }
+        .description {
+            height: 30rem;
+            &__list {
+                &__item {
+                    font-size: 2.1rem;
+                }
+            }
+        }
+        .hero {
+            background-size: cover;
+            height: 30rem;
+            width: 30rem;
+        }
+        .about {
+            h2 {
+                font-size: 3rem;
+                font-weight: 700;
+            }
+            p {
+                font-size: 1.9rem;
+                padding: 1rem;
+                text-indent: 5rem;
+            }
+        }
+        .socials {
+            height: 6.5rem;
+            margin: 1rem 0;
+            &__item {
+                height: 4rem;
+                width: 4rem;
+                &__icon {
+                    font-size: 3rem;
+                }
+            }
+        }
+        .button {
+            height: 5rem;
+            margin: 5rem auto;
+
+            &__text {
+                font-size: 3.5rem;
+            }
+        }
+        .button_span_1,
+        .button_span_3 {
+            height: .3rem;
+        }
+        .button_span_2,
+        .button_span_4 {
+            width: .3rem;
+        }
+    }
+}
