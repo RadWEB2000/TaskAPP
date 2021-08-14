@@ -160,8 +160,9 @@ export const Create = () => {
     }
     
     const taskObject = {
+        complete:false,
         date: date,
-        text: task
+        value: task
     }
 
 
@@ -174,18 +175,25 @@ export const Create = () => {
         e.preventDefault();
 
         if (noteObject.title !== '' && (noteObject.lead !== '' && noteObject.lead.length < 50 && noteObject.lead.length > 2)) {
-            console.log('Wszystko zostało poprawnie dodane')
+            alert('Note is add')
             noteAPI.unshift(noteObject);
         } else {
-            console.log('Uzupełnij brakujące pola')
+            alert('Uzupełnij brakujące pola')
         }
 
     }
 
   
     const addTask = e => {
-        // e.preventDefault();
-        taskAPI.unshift(taskObject);
+        e.preventDefault();
+
+        if (taskObject.value.length > 2) {
+            taskAPI.unshift(taskObject);
+            alert('Task is add')
+
+        } else {
+            alert('Wartość zadania musi zawierać conajmniej 3 znaki')
+        }
     }
 
 
