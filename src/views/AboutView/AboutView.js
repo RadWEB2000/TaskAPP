@@ -24,7 +24,7 @@ const Header = styled.header`
 
 const Social = ({children, link}) => {
     return (
-        <a href={link} target='_blank'  className={styles.socials__item}>
+        <a href={link} target='_blank' rel="noreferrer"  className={styles.socials__item}>
             {children}
         </a>
     )
