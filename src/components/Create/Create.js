@@ -1,5 +1,7 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState} from 'react';
 import styles from './Create.module.scss';
+import { noteAPI } from '../../data/noteAPI'
+import { taskAPI } from '../../data/taskAPI'
 
 const Menu = ({create,createTask,createNote}) => {
     return (
@@ -54,69 +56,71 @@ const Button = ({ behave }) => {
     )
 }
 
-const Task = ({inputValue, inputFunction}) => {
+const Task = ({submitForm, date, dateFunction, task, taskFunction}) => {
     return (
        <form action="" className={styles.form}>
             <div className={styles.form__wrapper}>
                 <TypeInput
                     input={true}
-                    inputFunction={inputFunction}
+                    inputFunction={dateFunction}
                     title='Date task'
                     name='date'
                     type='date'
-                    value={inputValue}
+                    value={date}
                 />  
                 <TypeInput
                     input={false}
-                    inputFunction={inputFunction}
+                    inputFunction={taskFunction}
                     title='Value of task'
                     name='valueTask'
-                    value={inputValue}
+                    value={task}
                 />
             </div>
-            <Button />
+            <Button behave={submitForm} />
         </form>
     )
 }
 
-const Note = ({inputValue, inputFunction}) => {
+const Note = ({submitForm, title, titleFunction, lead, leadFunction, img, imgFunction, note, noteFunction}) => {
     return (
         <form action="" className={styles.form}>
             <div className={styles.form__wrapper}>
                 <TypeInput
                     input={true}
-                    inputFunction={inputFunction}
+                    inputFunction={titleFunction}
                     title='Title'
                     name='title'
                     type='text'
-                    value={inputValue}
+                    value={title}
 
                 />  
                 <TypeInput
                     input={true}
-                    inputFunction={inputFunction}
+                    inputFunction={leadFunction}
                     title='Lead'
                     name='lead'
                     type='text'
-                    value={inputValue}
+                    value={lead}
                 />
                 <TypeInput
                     input={true}
-                    inputFunction={inputFunction}
+                    inputFunction={imgFunction}
                     title='Image URL'
                     name='image'
                     type='url'
-                    value={inputValue}
+                    value={img}
                 />
                 <TypeInput
                     input={false}
-                    inputFunction={inputFunction}
+                    inputFunction={noteFunction}
                     title='Value of note'
                     name='valueNote'
-                    value={inputValue}
+                    value={note}
                 />
             </div>
-            <Button/>
+            <Button
+                behave={submitForm}
+            />
         </form>
     )
 }
@@ -129,26 +133,60 @@ export const Create = () => {
     const createTask = () => toggleCreate(true);
     const createNote = () => toggleCreate(false);
 
-        
-    const [inputValue, inputToggle] = useState("");
+ 
+    const [title, updateTitle] = useState('');
+    const titleFunction = e => updateTitle(e.target.value);
 
-    const inputFunction = e => {
-        inputToggle(e.target.value);
-        const inputName = e.target.name;
-        // console.log('Wartosc przed warunkami: ' + inputName + ' = ' + inputValue);
+    const [lead, updateLead] = useState('');
+    const leadFunction = e => updateLead(e.target.value);
 
-        if (inputName === 'title') {
-            console.log(inputValue)
-        } else if (inputName === 'lead') {
-            console.log(`nazwa inputa to value note ${inputName}`)
-        } else if (inputName === 'image') {
-            console.log(`nazwa inputa to value note ${inputName}`)
-        } else if (inputName === 'valueNote') {
-            console.log(`nazwa inputa to value note ${inputName}`)
-        }
+    const [img, updateImg] = useState('');
+    const imgFunction = e => updateImg(e.target.value);
+    
+    const [note, updateNote] = useState('');
+    const noteFunction = e => updateNote(e.target.value);
+    
+    const [date, updateDate] = useState('');
+    const dateFunction = e => updateDate(e.target.value);
+    
+    const [task, updateTask] = useState('');
+    const taskFunction = e => updateTask(e.target.value);
+    
+    const noteObject = {
+        title: title,
+        lead: lead,
+        img: img,
+        text: note
     }
-   
-   
+    
+    const taskObject = {
+        date: date,
+        text: task
+    }
+
+
+    
+
+    console.log(noteObject.title + '\n' + noteObject.lead + '\n' + noteObject.img + '\n' + noteObject.text)
+    console.log(taskObject.date + '\n' + taskObject.text)
+
+    const addNote = e => {
+        e.preventDefault();
+
+        if (noteObject.title !== '' && (noteObject.lead !== '' && noteObject.lead.length < 50 && noteObject.lead.length > 2)) {
+            console.log('Wszystko zostało poprawnie dodane')
+            noteAPI.unshift(noteObject);
+        } else {
+            console.log('Uzupełnij brakujące pola')
+        }
+
+    }
+
+  
+    const addTask = e => {
+        // e.preventDefault();
+        taskAPI.unshift(taskObject);
+    }
 
 
     return (
@@ -162,20 +200,27 @@ export const Create = () => {
             <div className={styles.wrapper}>
                 {
                     create 
-                    ?  <Task
-                            inputValue={inputValue}
-                            inputFunction={inputFunction}
-                        />
+                    ? <Task
+                        dateConst={date}
+                        dateFunction={dateFunction}
+                        taskConst={task}
+                        taskFunction={taskFunction}
+                        submitForm={addTask}  
+                    />
                     : <Note
-                            inputValue={inputValue}
-                            inputFunction={inputFunction}
+                        titleConst={title}
+                        titleFunction={titleFunction}
+                        leadConst={lead}
+                        leadFunction={leadFunction}
+                        imgConst={img}
+                        imgFunction={imgFunction}
+                        noteConst={note}
+                        noteFunction={noteFunction}
+                        submitForm={addNote}
                       />
                 }
             </div>
         </div>
-            <strong style={{ 'position': 'fixed', 'top': '0'}}>
-            
-        </strong>    
       
         </>    
 
